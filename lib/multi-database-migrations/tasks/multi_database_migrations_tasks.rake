@@ -10,7 +10,7 @@ module MultiMigrations
     if ActiveRecord::Base.configurations.has_key?("#{ENV['DATABASE']}_#{Rails.env}")
       return "#{ENV['DATABASE']}_#{Rails.env}"
     else
-      match = ActiveRecord::Base.configurations.find { |config| config[1]['database'] == ENV['DATABASE'] }
+      match = ActiveRecord::Base.configurations.find { |config| config[1]['database'] == ENV['DATABASE'] && config[0] == Rails.env }
       return match[0] unless match.nil?
     end
   end
